@@ -20,5 +20,9 @@ namespace G1GLK1_HFT_2021221.Logic
         public void UpdateName(int consumerID, string name);
         public void UpdateAdress(int consumerID, string address);
 
+        public string MostOftenOrderedFood(int consumerID);
+        public Restaurant MostOrdersFromRestaurant(int consumerID);
+
+
     }
 }
