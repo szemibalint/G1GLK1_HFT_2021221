@@ -34,13 +34,13 @@ namespace G1GLK1_HFT_2021221.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Restaurant>()
-                .HasData(new Restaurant { RestaurantId = 1, Location = "Raday  Street" , Cuisine = "Chinese" , NameOfRestaurant = "Best 'Chicken' in Town"});
+                .HasData(new Restaurant { RestaurantId = 1, Location = "Raday  Street" , Cuisine = "Chinese" , Name = "Best 'Chicken' in Town"});
 
             modelBuilder.Entity<Order>()
                 .HasData(new Order { OrderId = 1,  ConsumerId = 1 , RestaurantId = 1,  Food = "Chicken Curry with rice" , Price = 1769,   TimeOfOrder = new DateTime(2021,11,14,16,23,00)});
 
             modelBuilder.Entity<Consumer>()
-                .HasData(new Consumer { ConsumerId = 1 ,  FirstName = "Rock" , LastName = "Lee" , Address = "Kossuth Square 45"});
+                .HasData(new Consumer { ConsumerId = 1 , Name = "Rock Lee" , Address = "Kossuth Square 45"});
         }
     }
 }

@@ -14,7 +14,7 @@ namespace G1GLK1_HFT_2021221.Models
         [Key]
         public int RestaurantId { get; set; }
 
-        public string NameOfRestaurant { get; set; }
+        public string Name { get; set; }
 
         public string Location { get; set; }
 
