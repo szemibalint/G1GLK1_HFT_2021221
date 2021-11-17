@@ -11,10 +11,42 @@ namespace G1GLK1_HFT_2021221.Logic
     class RestaurantLogic : IRestaurantLogic
     {
         private readonly IRestaurantRepository _restaurantRepository;
+        private readonly IConsumerRepository _consumerRepository;
 
-        public RestaurantLogic(IRestaurantRepository restaurantRepository)
+        public RestaurantLogic(IRestaurantRepository restaurantRepository, IConsumerRepository consumerRepository)
         {
             _restaurantRepository = restaurantRepository;
+            _consumerRepository = consumerRepository;
+        }
+
+        public Consumer ConsumerWithMostOrders(int restaurantID)
+        {
+            Restaurant restaurant = _restaurantRepository.GetOne(restaurantID);
+            if (restaurant == null)
+            {
+                throw new Exception("restaurant cannot be found");
+            }
+            List<Order> orders = restaurant.Orders.ToList();
+            
+            int biggestCount = 0;
+            int consumerWithMostOrders = 0;
+            foreach (var currentOrder in orders)
+            {
+                int count = 0;
+                foreach (var order in orders)
+                {
+                    if (order.ConsumerId == currentOrder.ConsumerId)
+                    {
+                        count++;
+                    }
+                }
+                if (count > biggestCount)
+                {
+                    biggestCount = count;
+                    consumerWithMostOrders = currentOrder.ConsumerId;
+                }
+            }
+            return _consumerRepository.GetOne(consumerWithMostOrders);
         }
 
         public void CreateRestaurant(Restaurant restaurant)
