@@ -32,6 +32,26 @@ namespace G1GLK1_HFT_2021221.Logic
             _orderRepository.Delete(order);
         }
 
+        public string GetConsumerAddress(int orderID)
+        {
+            Order order = _orderRepository.GetOne(orderID);
+            if (order == null)
+            {
+                throw new Exception("order cannot be found!");
+            }
+            return order.Consumer.Address;
+        }
+
+        public string GetConsumerName(int orderID)
+        {
+            Order order = _orderRepository.GetOne(orderID);
+            if (order == null)
+            {
+                throw new Exception("order cannot be found!");
+            }
+            return order.Consumer.Name;
+        }
+
         public Order GetOrder(int orderID)
         {
             Order order = _orderRepository.GetOne(orderID);

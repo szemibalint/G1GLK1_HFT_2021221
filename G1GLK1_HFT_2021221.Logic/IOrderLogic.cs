@@ -19,5 +19,7 @@ namespace G1GLK1_HFT_2021221.Logic
 
         public void UpdateOrder(int orderID, string food, int price);
 
+        public string GetConsumerName(int orderID);
+        public string GetConsumerAddress(int orderID);
     }
 }
