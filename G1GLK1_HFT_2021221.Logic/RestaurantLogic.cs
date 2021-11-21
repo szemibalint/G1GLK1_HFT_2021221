@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace G1GLK1_HFT_2021221.Logic
 {
-    class RestaurantLogic : IRestaurantLogic
+    public class RestaurantLogic : IRestaurantLogic
     {
         private readonly IRestaurantRepository _restaurantRepository;
         private readonly IConsumerRepository _consumerRepository;
