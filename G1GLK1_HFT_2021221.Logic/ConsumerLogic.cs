@@ -11,13 +11,13 @@ namespace G1GLK1_HFT_2021221.Logic
     public class ConsumerLogic : IConsumerLogic
     {
         private readonly IConsumerRepository _consumerRepository;
-        //private readonly IOrderRepository _orderRepository;
+        private readonly IOrderRepository _orderRepository;
         private readonly IRestaurantRepository _restaurantRepository;
 
-        public ConsumerLogic(IConsumerRepository consumerRepository,  IRestaurantRepository restaurantRepository)
+        public ConsumerLogic(IConsumerRepository consumerRepository,  IRestaurantRepository restaurantRepository, IOrderRepository orderRepository)
         {
             _consumerRepository = consumerRepository;
-            //_orderRepository = orderRepository;
+            _orderRepository = orderRepository;
             _restaurantRepository = restaurantRepository;
         }
 
@@ -51,14 +51,14 @@ namespace G1GLK1_HFT_2021221.Logic
             return _consumerRepository.GetAll().ToList();
         }
 
-        public string MostOftenOrderedFood(int consumerID)
+        public string MostOftenOrderedFoodByConsumer(int consumerID)
         {
             Consumer consumer = _consumerRepository.GetOne(consumerID);
             if (consumer == null)
             {
                 throw new Exception("consumer cannot be found");
             }
-            List<Order> orders = consumer.Orders.ToList();
+            List<Order> orders = _orderRepository.GetAll().Where(X => X.ConsumerId == consumer.ConsumerId).ToList();
             int biggestCount = 0;
             string food = "";
             foreach (var currentOrder in orders)
@@ -80,14 +80,14 @@ namespace G1GLK1_HFT_2021221.Logic
             return food;
         }
 
-        public Restaurant MostOrdersFromRestaurant(int consumerID)
+        public Restaurant MostOrdersFromRestaurantByConsumer(int consumerID)
         {
             Consumer consumer = _consumerRepository.GetOne(consumerID);
             if (consumer == null)
             {
                 throw new Exception("consumer cannot be found");
             }
-            List<Order> orders = consumer.Orders.ToList();
+            List<Order> orders = _orderRepository.GetAll().Where(x => x.ConsumerId == consumer.ConsumerId).ToList();
             List<Restaurant> restaurants = new List<Restaurant>();
             foreach (var order in orders)
             {
@@ -123,6 +123,8 @@ namespace G1GLK1_HFT_2021221.Logic
                 throw new Exception("consumer cannot be found");
             }
             consumer.Address = address;
+
+            _consumerRepository.Update(consumer);
         }
 
         public void UpdateName(int consumerID, string name)
@@ -133,6 +135,9 @@ namespace G1GLK1_HFT_2021221.Logic
                 throw new Exception("consumer cannot be found");
             }
             consumer.Name = name;
+
+            _consumerRepository.Update(consumer);
+
         }
     }
 }

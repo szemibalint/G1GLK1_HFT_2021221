@@ -11,10 +11,12 @@ namespace G1GLK1_HFT_2021221.Logic
     public class OrderLogic : IOrderLogic
     {
         private readonly IOrderRepository _orderRepository;
+        private readonly IConsumerRepository _consumerRepository;
 
-        public OrderLogic(IOrderRepository orderRepository)
+        public OrderLogic(IOrderRepository orderRepository, IConsumerRepository consumerRepository)
         {
             _orderRepository = orderRepository;
+            _consumerRepository = consumerRepository;
         }
 
         public void CreateOrder(Order order)
@@ -39,7 +41,10 @@ namespace G1GLK1_HFT_2021221.Logic
             {
                 throw new Exception("order cannot be found!");
             }
-            return order.Consumer.Address;
+
+            Consumer consumer = _consumerRepository.GetOne(order.ConsumerId);
+
+            return consumer.Address;
         }
 
         public string GetConsumerName(int orderID)
@@ -49,7 +54,10 @@ namespace G1GLK1_HFT_2021221.Logic
             {
                 throw new Exception("order cannot be found!");
             }
-            return order.Consumer.Name;
+
+            Consumer consumer = _consumerRepository.GetOne(order.ConsumerId);
+
+            return consumer.Name;
         }
 
         public Order GetOrder(int orderID)

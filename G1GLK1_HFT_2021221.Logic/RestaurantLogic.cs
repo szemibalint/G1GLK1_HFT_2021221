@@ -12,21 +12,18 @@ namespace G1GLK1_HFT_2021221.Logic
     {
         private readonly IRestaurantRepository _restaurantRepository;
         private readonly IConsumerRepository _consumerRepository;
+        private readonly IOrderRepository _orderRepository;
 
-        public RestaurantLogic(IRestaurantRepository restaurantRepository, IConsumerRepository consumerRepository)
+        public RestaurantLogic(IRestaurantRepository restaurantRepository, IConsumerRepository consumerRepository, IOrderRepository orderRepository)
         {
             _restaurantRepository = restaurantRepository;
             _consumerRepository = consumerRepository;
+            _orderRepository = orderRepository;
         }
 
-        public Consumer ConsumerWithMostOrders(int restaurantID)
+        public Consumer ConsumerWithMostOrders()
         {
-            Restaurant restaurant = _restaurantRepository.GetOne(restaurantID);
-            if (restaurant == null)
-            {
-                throw new Exception("restaurant cannot be found");
-            }
-            List<Order> orders = restaurant.Orders.ToList();
+            List<Order> orders = _orderRepository.GetAll().ToList();
             
             int biggestCount = 0;
             int consumerWithMostOrders = 0;
@@ -54,7 +51,7 @@ namespace G1GLK1_HFT_2021221.Logic
             _restaurantRepository.Add(restaurant);
         }
 
-        public void DeletRestaurant(int restaurantID)
+        public void DeleteRestaurant(int restaurantID)
         {
             Restaurant restaurant = _restaurantRepository.GetOne(restaurantID);
             if (restaurant == null)
