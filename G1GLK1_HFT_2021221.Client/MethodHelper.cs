@@ -173,7 +173,7 @@ namespace G1GLK1_HFT_2021221.Client
             Console.Write("Give the Consumer ID: ");
             consumer.ConsumerId = int.Parse(Console.ReadLine());
 
-            Console.Write("Give the new Name: ");
+            Console.Write("Give the new Name you want to change to: ");
             consumer.Name = Console.ReadLine();
 
             foodDeliveryService.Put<Consumer>(consumer, "consumer/name");
@@ -190,7 +190,7 @@ namespace G1GLK1_HFT_2021221.Client
             Console.Write("Give the Consumer ID: ");
             consumer.ConsumerId = int.Parse(Console.ReadLine());
 
-            Console.Write("Give the new Address: ");
+            Console.Write("Give the new Address you want to change to: ");
             consumer.Address = Console.ReadLine();
 
             foodDeliveryService.Put<Consumer>(consumer, "consumer/address");
@@ -207,7 +207,7 @@ namespace G1GLK1_HFT_2021221.Client
             Console.Write("Give the Order ID: ");
             order.OrderId = int.Parse(Console.ReadLine());
 
-            Console.Write("Give the new Food: ");
+            Console.Write("Give the new Food you want to change to: ");
             order.Food = Console.ReadLine();
 
             Console.Write("Give the new Price: ");
@@ -227,7 +227,7 @@ namespace G1GLK1_HFT_2021221.Client
             Console.Write("Give the Restaurant ID: ");
             restaurant.RestaurantId = int.Parse(Console.ReadLine());
 
-            Console.Write("Give the new Name; ");
+            Console.Write("Give the new Name you want to change to; ");
             restaurant.Name = Console.ReadLine();
 
             foodDeliveryService.Put<Restaurant>(restaurant, "restaurant/name");
@@ -244,7 +244,7 @@ namespace G1GLK1_HFT_2021221.Client
             Console.Write("Give the Restaurant ID: ");
             restaurant.RestaurantId = int.Parse(Console.ReadLine());
 
-            Console.Write("Give the new Location; ");
+            Console.Write("Give the new Location you want to change to; ");
             restaurant.Location = Console.ReadLine();
 
             foodDeliveryService.Put<Restaurant>(restaurant, "restaurant/location");
@@ -261,7 +261,7 @@ namespace G1GLK1_HFT_2021221.Client
             Console.Write("Give the Restaurant ID: ");
             restaurant.RestaurantId = int.Parse(Console.ReadLine());
 
-            Console.Write("Give the new Cuisine; ");
+            Console.Write("Give the new Cuisine you want to change to; ");
             restaurant.Cuisine = Console.ReadLine();
 
             foodDeliveryService.Put<Restaurant>(restaurant, "restaurant/cuisine");
@@ -297,7 +297,7 @@ namespace G1GLK1_HFT_2021221.Client
 
         public void DeleteRestaurant() 
         {
-            Console.Write("Give the Restaurant ID: ");
+            Console.Write("Give the Id of the Restaurant: ");
             int id = int.Parse(Console.ReadLine());
 
             foodDeliveryService.Delete(id, $"restaurant/{id}");
@@ -309,7 +309,7 @@ namespace G1GLK1_HFT_2021221.Client
 
         public void GetMostOftenOrderedFoodByConsumer() 
         {
-            Console.Write("Give the Consumer ID: ");
+            Console.Write("Give the ID of the consumer");
             int id = int.Parse(Console.ReadLine());
 
            string food = foodDeliveryService.GetSingle<string>($"consumer/{id}/food");
@@ -321,7 +321,7 @@ namespace G1GLK1_HFT_2021221.Client
 
         public void GetMostOrdersFromRestaurantByConsumer() 
         {
-            Console.Write("Give the Consumer ID: ");
+            Console.Write("Give the ID of the consumer: ");
             int id = int.Parse(Console.ReadLine());
 
             Restaurant restaurant = foodDeliveryService.GetSingle<Restaurant>($"consumer/{id}/restaurant");
@@ -333,7 +333,7 @@ namespace G1GLK1_HFT_2021221.Client
 
         public void GetConsumerNameOfOrder() 
         {
-            Console.Write("Give the Order ID: ");
+            Console.Write("Give the ID of the order: ");
             int id = int.Parse(Console.ReadLine());
 
             string name = foodDeliveryService.GetSingle<string>($"order/{id}/name");
@@ -344,7 +344,7 @@ namespace G1GLK1_HFT_2021221.Client
 
         public void GetConsumerAddressOfOrder() 
         {
-            Console.Write("Give the Order ID: ");
+            Console.Write("Give the ID of the order: ");
             int id = int.Parse(Console.ReadLine());
 
             string address = foodDeliveryService.GetSingle<string>($"order/{id}/address");
